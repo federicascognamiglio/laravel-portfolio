@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('projects.index');
+        // Prelevo i progetti dal database
+        $projects = Project::all();
+
+        // Ritorno la view con i progetti e passo i dati
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -34,9 +39,9 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        return view('projects.show', compact('project'));
     }
 
     /**
