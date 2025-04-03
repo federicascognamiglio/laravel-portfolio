@@ -23,7 +23,9 @@
                 <td>{{ $project->data_inizio }}</td>
                 <td>{{ $project->data_fine }}</td>
                 <td>{{ $project->riassunto }}</td>
-                <td><a href="{{ route('projects.show', $project->id) }}" class="btn btn-primary">Dettagli</a></td>
+                <td><a href="{{ route('projects.show', $project) }}" class="btn btn-primary">Dettagli</a></td>
+                <td><a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a></td>
+                <td><a href="{{ route('projects.destroy', $project) }}" class="btn btn-outline-danger">Elimina</a></td>
             </tr>
             @endforeach
         </tbody>
