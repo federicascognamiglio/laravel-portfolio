@@ -33,9 +33,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        // Prelevo i dati dalla request
         $data=$request->all();
+
+        // Creao una nuova istanza del progetto
         $newProject = new Project();
         
+        // Assegno i valori ai campi del progetto
         $newProject->nome = $data['nome'];
         $newProject->cliente = $data['cliente'];
         $newProject->data_inizio = $data['data_inizio'];
@@ -43,6 +47,8 @@ class ProjectController extends Controller
         $newProject->riassunto = $data['riassunto'];
 
         $newProject->save();
+
+        // Restituisco la vista con il progetto creato
         return redirect()->route('projects.show', $newProject);
     }
 
@@ -57,17 +63,31 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        // Prelevo i dati dalla request
+        $data = $request->all();
+
+        // Riassegno i valori ai campi del progetto
+        $project->nome = $data['nome'];
+        $project->cliente = $data['cliente'];
+        $project->data_inizio = $data['data_inizio'];
+        $project->data_fine = $data['data_fine'];
+        $project->riassunto = $data['riassunto'];
+
+        // Salvo le modifiche
+        $project->update();
+
+        // Restituisco la vista con il progetto aggiornato
+        return redirect()->route('projects.show', $project);
     }
 
     /**
