@@ -16,9 +16,33 @@
         <p><small>{{ $project->data_inizio }} - {{ $project->data_fine }}</small></p>
         <p>{{ $project->riassunto }}</p>
         <div class="d-flex column-gap-3 mt-5">
-            <a class="btn btn-outline-warning" href="{{ route('projects.edit', $project) }}">Modifica</a>
-            <a class="btn btn-outline-danger" href="{{ route('projects.destroy', $project) }}">Elimina</a>
             <a class="btn btn-outline-primary" href="{{ route('projects.index') }}">Torna ai progetti</a>
+            <a class="btn btn-outline-warning" href="{{ route('projects.edit', $project) }}">Modifica</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Elimina</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Elimina definitivamente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">Sei sicuro di voler eliminare il progetto
+                <strong>{{ $project->nome }}</strong>?<br>Questa azione non può essere annullata.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="btn btn-outline-danger" href="{{ route('projects.destroy', $project) }}"
+                        value="Elimina">
+                </form>
+            </div>
         </div>
     </div>
 </div>

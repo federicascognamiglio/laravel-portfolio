@@ -3,7 +3,10 @@
 @section ('title', "MyProjects")
 @section ('content')
 <div class="container">
-    <h1 class="mt-5 mb-3 text-center">I miei Progetti</h1>
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="mt-5 mb-4">I miei Progetti</h1>
+        <a href="{{ route('projects.create')}}" class="btn btn-primary mb-5">Aggiungi progetto</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -23,13 +26,12 @@
                 <td>{{ $project->data_inizio }}</td>
                 <td>{{ $project->data_fine }}</td>
                 <td>{{ $project->riassunto }}</td>
-                <td><a href="{{ route('projects.show', $project) }}" class="btn btn-primary">Dettagli</a></td>
+                <td><a href="{{ route('projects.show', $project) }}" class="btn btn-outline-primary">Dettagli</a></td>
                 <td><a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a></td>
-                <td><a href="{{ route('projects.destroy', $project) }}" class="btn btn-outline-danger">Elimina</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('projects.create')}}" class="btn btn-primary my-5">Aggiungi progetto</a>
+
 </div>
 @endsection
