@@ -32,15 +32,13 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Elimina definitivamente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">Sei sicuro di voler eliminare il progetto
-                <strong>{{ $project->nome }}</strong>?<br>Questa azione non può essere annullata.</div>
+            <div class="modal-body">Sei sicuro di voler eliminare questo progetto?<br>Questa azione non può essere annullata.</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                 <form action="{{ route('projects.destroy', $project) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <input type="submit" class="btn btn-outline-danger" href="{{ route('projects.destroy', $project) }}"
-                        value="Elimina">
+                    <input type="submit" class="btn btn-outline-danger" value="Elimina">
                 </form>
             </div>
         </div>

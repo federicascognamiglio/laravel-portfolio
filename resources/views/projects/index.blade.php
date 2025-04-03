@@ -28,10 +28,34 @@
                 <td>{{ $project->riassunto }}</td>
                 <td><a href="{{ route('projects.show', $project) }}" class="btn btn-outline-primary">Dettagli</a></td>
                 <td><a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a></td>
+                <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#{{ $project->id }}">Elimina</button></td>
             </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="{{ $project->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Elimina definitivamente</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">Sei sicuro di voler eliminare questo progetto?<br>Questa azione non può
+                            essere
+                            annullata.</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                            <form action="{{ route('projects.destroy', $project) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-outline-danger" value="Elimina">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
         </tbody>
     </table>
-
 </div>
 @endsection
