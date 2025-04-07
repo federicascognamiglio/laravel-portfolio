@@ -22,12 +22,6 @@ class TechnologiesTableSeeder extends Seeder
             'Laravel',
             'React',
             'Java',
-            'Python',
-            'Ruby',
-            'C#',
-            'C++',
-            'Swift',
-            'Angular'
         ];
 
         foreach ($technologies as $technology) {

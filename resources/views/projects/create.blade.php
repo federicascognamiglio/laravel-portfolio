@@ -42,6 +42,15 @@
                 <label for="riassunto" class="form-label">Riassunto</label>
                 <textarea type="text" name="riassunto" id="riassunto" class="form-control"></textarea>
             </div>
+            <p class="form-label">Technologies</p>
+            <div class="form-control mb-4 ms-2 col d-flex justify-content-around">
+                @foreach($technologies as $technology)
+                <div>
+                    <input type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="technology-{{ $technology->id }}">
+                    <label class="form-label mt-2" for="technology-{{ $technology->id }}">{{ $technology->nome }}</label>
+                </div>
+                @endforeach
+            </div>
             <div class="me-auto">
                 <button class="btn btn-primary">Salva</button>
             </div>

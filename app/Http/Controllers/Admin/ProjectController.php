@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,11 +27,12 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        // Prelevo i types dal database
+        // Prelevo i dati dal database
         $types = Type::all();
+        $technologies = Technology::all();
 
         // Ritorno la view e passo i tipi
-        return view('projects.create', compact('types'));
+        return view('projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -53,6 +55,9 @@ class ProjectController extends Controller
         $newProject->riassunto = $data['riassunto'];
 
         $newProject->save();
+
+        // Aggiungo gli id delle technologies alla tabella ponte
+        $newProject->technologies()->attach($data['technologies']);
 
         // Restituisco la vista con il progetto creato
         return redirect()->route('projects.show', $newProject);
