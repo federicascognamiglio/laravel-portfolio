@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Type;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -25,7 +26,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        // Prelevo i types dal database
+        $types = Type::all();
+
+        // Ritorno la view e passo i tipi
+        return view('projects.create', compact('types'));
     }
 
     /**
@@ -42,6 +47,7 @@ class ProjectController extends Controller
         // Assegno i valori ai campi del progetto
         $newProject->nome = $data['nome'];
         $newProject->cliente = $data['cliente'];
+        $newProject->type_id = $data['type_id'];
         $newProject->data_inizio = $data['data_inizio'];
         $newProject->data_fine = $data['data_fine'];
         $newProject->riassunto = $data['riassunto'];
@@ -65,7 +71,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        // Prelevo i types dal database
+        $types = Type::all();
+
+        // Ritorno la view e passo i dati
+        return view('projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -79,6 +89,7 @@ class ProjectController extends Controller
         // Riassegno i valori ai campi del progetto
         $project->nome = $data['nome'];
         $project->cliente = $data['cliente'];
+        $project->type_id = $data['type_id'];
         $project->data_inizio = $data['data_inizio'];
         $project->data_fine = $data['data_fine'];
         $project->riassunto = $data['riassunto'];
