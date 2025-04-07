@@ -14,7 +14,7 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Data inizio</th>
                 <th scope="col">Data fine</th>
-                <th scope="col">Riassunto</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Dettagli</th>
             </tr>
         </thead>
@@ -25,7 +25,7 @@
                 <td>{{ $project->cliente }}</td>
                 <td>{{ $project->data_inizio }}</td>
                 <td>{{ $project->data_fine }}</td>
-                <td>{{ $project->riassunto }}</td>
+                <td>{{ $project->type->nome }}</td>
                 <td><a href="{{ route('projects.show', $project) }}" class="btn btn-outline-primary">Dettagli</a></td>
                 <td><a href="{{ route('projects.edit', $project) }}" class="btn btn-outline-warning">Modifica</a></td>
                 <td><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
@@ -40,7 +40,7 @@
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Elimina definitivamente</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">Sei sicuro di voler eliminare questo progetto?<br>Questa azione non può
+                        <div class="modal-body">Sei sicuro di voler eliminare questo progetto {{ $project->nome }}?<br>Questa azione non può
                             essere
                             annullata.</div>
                         <div class="modal-footer">

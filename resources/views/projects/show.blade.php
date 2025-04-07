@@ -12,6 +12,7 @@
 
     <div class="d-flex flex-column align-items-center">
         <h1 class="mt-5 mb-3">{{ $project->nome }}</h1>
+        <span class="badge text-bg-primary mb-4">{{ $project->type->nome }}</span>
         <p>Cliente: {{ $project->cliente }}</p>
         <p><small>{{ $project->data_inizio }} - {{ $project->data_fine }}</small></p>
         <p>{{ $project->riassunto }}</p>

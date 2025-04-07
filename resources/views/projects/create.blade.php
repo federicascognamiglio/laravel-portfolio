@@ -31,10 +31,18 @@
                 <input type="date" name="data_fine" id="data_fine" class="form-control">
             </div>
             <div class="mb-3 col">
+                <label for="type_id" class="form-label">Tipo</label>
+                <select class="form-select" name="type_id" id="type_id" aria-label="Default select example">
+                    @foreach($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3 col">
                 <label for="riassunto" class="form-label">Riassunto</label>
                 <textarea type="text" name="riassunto" id="riassunto" class="form-control"></textarea>
             </div>
-            <div class="m-auto">
+            <div class="me-auto">
                 <button class="btn btn-primary">Salva</button>
             </div>
         </div>
