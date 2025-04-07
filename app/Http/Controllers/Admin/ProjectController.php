@@ -56,8 +56,11 @@ class ProjectController extends Controller
 
         $newProject->save();
 
-        // Aggiungo gli id delle technologies alla tabella ponte
-        $newProject->technologies()->attach($data['technologies']);
+        // Controllo che l'array di technologies esista
+        if($request->has('technologies')) {
+            // Se esiste, aggiorno gli id delle technologies alla tabella ponte
+            $newProject->technologies()->attach($data['technologies']);
+        }
 
         // Restituisco la vista con il progetto creato
         return redirect()->route('projects.show', $newProject);
@@ -103,8 +106,14 @@ class ProjectController extends Controller
         // Salvo le modifiche
         $project->update();
 
-        // Aggiorno gli id delle technologies alla tabella ponte
-        $project->technologies()->sync($data['technologies']);
+        // Controllo che l'array di technologies esista
+        if($request->has('technologies')) {
+            // Se esiste, aggiorno gli id delle technologies alla tabella ponte
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            // Altrimenti, svuoto la tabella ponte
+            $project->technologies()->detach();
+        }
 
         // Restituisco la vista con il progetto aggiornato
         return redirect()->route('projects.show', $project);
@@ -115,6 +124,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // Controllo se il progetto ha delle tecnologie associate
+        if($project->technologies()->count() > 0) {
+            // Se ha delle tecnologie associate, le svuoto
+            $project->technologies()->detach();
+        }
+
         // Elimino il progetto
         $project->delete();
 
