@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Nuovo Progetto')
-
 @section('content')
 <div class="container">
     <nav aria-label="breadcrumb">
@@ -35,6 +34,7 @@
                 <input type="date" name="data_fine" id="data_fine" class="form-control"
                     value="{{ $project->data_fine }}">
             </div>
+            <!-- Types -->
             <div class="mb-3 col">
                 <label for="type_id" class="form-label">Tipo</label>
                 <select class="form-select" name="type_id" id="type_id" aria-label="Default select example">
@@ -47,6 +47,16 @@
                 <label for="riassunto" class="form-label">Riassunto</label>
                 <textarea type="text" name="riassunto" id="riassunto"
                     class="form-control">{{ $project->riassunto }}</textarea>
+            </div>
+            <!-- Technologies -->
+            <p class="form-label">Technologies</p>
+            <div class="form-control mb-4 ms-2 col d-flex justify-content-around">
+                @foreach($technologies as $technology)
+                <div>
+                    <input type="checkbox" name="technologies[]" value="{{ $technology->id }}" id="technology-{{ $technology->id }}" {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                    <label class="form-label mt-2" for="technology-{{ $technology->id }}">{{ $technology->nome }}</label>
+                </div>
+                @endforeach
             </div>
             <div class="me-auto">
                 <button class="btn btn-primary">Salva</button>

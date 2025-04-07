@@ -76,11 +76,12 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        // Prelevo i types dal database
+        // Prelevo i dati dal database
         $types = Type::all();
+        $technologies = Technology::all();
 
         // Ritorno la view e passo i dati
-        return view('projects.edit', compact('project', 'types'));
+        return view('projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -101,6 +102,9 @@ class ProjectController extends Controller
 
         // Salvo le modifiche
         $project->update();
+
+        // Aggiorno gli id delle technologies alla tabella ponte
+        $project->technologies()->sync($data['technologies']);
 
         // Restituisco la vista con il progetto aggiornato
         return redirect()->route('projects.show', $project);

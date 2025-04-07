@@ -30,6 +30,7 @@
                 <label for="data_fine" class="form-label">Data fine</label>
                 <input type="date" name="data_fine" id="data_fine" class="form-control">
             </div>
+            <!-- Types -->
             <div class="mb-3 col">
                 <label for="type_id" class="form-label">Tipo</label>
                 <select class="form-select" name="type_id" id="type_id" aria-label="Default select example">
@@ -42,6 +43,7 @@
                 <label for="riassunto" class="form-label">Riassunto</label>
                 <textarea type="text" name="riassunto" id="riassunto" class="form-control"></textarea>
             </div>
+            <!-- Technologies -->
             <p class="form-label">Technologies</p>
             <div class="form-control mb-4 ms-2 col d-flex justify-content-around">
                 @foreach($technologies as $technology)
