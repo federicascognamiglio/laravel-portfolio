@@ -17,12 +17,16 @@
         <h1 class="mt-5 mb-3">{{ $project->nome }}</h1>
         <!-- Types -->
         <span class="badge text-bg-primary mb-3">{{ $project->type->nome }}</span>
+        <!-- Image -->
+        @if($project->image_url)
+        <img src="{{ asset('storage/' . $project->image_url) }}" class="img-fluid rounded-start mb-3" alt="{{ $project->nome }}" style="max-width: 500px">
+        @endif
         <!-- Technologies -->
         @if(count($project->technologies) > 0)
-        <div class="mb-5">
+        <div class="mb-3">
             <p class="text-center">Technologies:</p>
             @foreach($project->technologies as $technology)
-            <span class="badge mx-2" style="border-style: solid; border-width: 1; border-color: {{ $technology->colore }}; color: {{ $technology->colore }}">{{ $technology->nome }}</span>
+            <span class="badge mx-1" style="border-style: solid; border-width: 1; border-color: {{ $technology->colore }}; color: {{ $technology->colore }}">{{ $technology->nome }}</span>
             @endforeach
         </div>
         @endif
@@ -31,7 +35,7 @@
         <p><small>{{ $project->data_inizio }} - {{ $project->data_fine }}</small></p>
         <p>{{ $project->riassunto }}</p>
         <!-- Actions -->
-        <div class="d-flex column-gap-3 mt-5">
+        <div class="d-flex column-gap-3 mt-3 mb-5">
             <a class="btn btn-outline-primary" href="{{ route('projects.index') }}">Torna ai progetti</a>
             <a class="btn btn-outline-warning" href="{{ route('projects.edit', $project) }}">Modifica</a>
             <!-- Button trigger modal -->
