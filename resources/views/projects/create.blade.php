@@ -4,14 +4,16 @@
 
 @section('content')
 <div class="container">
+    <!-- Navigation -->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb mt-4">
             <li class="breadcrumb-item"><a href="{{ route('projects.index') }}">Progetti</a></li>
             <li class="breadcrumb-item active" aria-current="page">Aggiungi progetto</li>
         </ol>
     </nav>
+    <!-- Form -->
     <h1 class="text-center mt-5">Aggiungi un nuovo progetto</h1>
-    <form action="{{ route('projects.store') }}" method="POST">
+    <form action="{{ route('projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row row-cols-2 mt-4">
             <div class="mb-3 col">
@@ -53,7 +55,12 @@
                 </div>
                 @endforeach
             </div>
-            <div class="me-auto">
+            <!-- Image -->
+            <div class="mb-3 col">
+                <label for="img" class="form-label">Immagine</label>
+                <input type="file" name="image_url" id="img" class="form-control">
+            </div>
+            <div class="mb-3 d-flex justify-content-end align-items-center">
                 <button class="btn btn-primary">Salva</button>
             </div>
         </div>
