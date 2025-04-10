@@ -110,6 +110,18 @@ class ProjectController extends Controller
         $project->data_fine = $data['data_fine'];
         $project->riassunto = $data['riassunto'];
 
+        // Se l'utente ha caricato un'immagine, la modifico
+        if(array_key_exists('image_url', $data)) {
+            // Se esiste, elimino quella precedente
+            if($project->image_url) {
+                Storage::delete($project->image_url);
+            }
+            // Salvo la nuova immagine
+            $img_path = Storage::putFile('uploads', $data['image_url']);
+            // Assegno il nuovo path all'immagine
+            $project->image_url = $img_path;
+        }
+
         // Salvo le modifiche
         $project->update();
 
@@ -135,6 +147,12 @@ class ProjectController extends Controller
         if($project->technologies()->count() > 0) {
             // Se ha delle tecnologie associate, le svuoto
             $project->technologies()->detach();
+        }
+
+        // Controllo se il progetto ha un'immagine
+        if($project->image_url) {
+            // Se ha un'immagine, la elimino
+            Storage::delete($project->image_url);
         }
 
         // Elimino il progetto

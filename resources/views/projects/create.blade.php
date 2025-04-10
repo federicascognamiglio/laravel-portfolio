@@ -60,7 +60,8 @@
                 <label for="img" class="form-label">Immagine</label>
                 <input type="file" name="image_url" id="img" class="form-control">
             </div>
-            <div class="mb-3 d-flex justify-content-end align-items-center">
+            <!-- Submit -->
+            <div class="d-flex justify-content-end align-items-center">
                 <button class="btn btn-primary">Salva</button>
             </div>
         </div>
