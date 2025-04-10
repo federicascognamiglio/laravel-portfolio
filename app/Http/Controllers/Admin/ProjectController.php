@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Type;
 use App\Models\Project;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,12 @@ class ProjectController extends Controller
         $newProject->data_inizio = $data['data_inizio'];
         $newProject->data_fine = $data['data_fine'];
         $newProject->riassunto = $data['riassunto'];
+
+        // Se l'utente ha caricato un'immagine, la salvo
+        if(array_key_exists('image_url', $data)) {
+            $img_path = Storage::putFile('uploads', $data['image_url']);
+            $newProject->image_url = $img_path;
+        }
 
         $newProject->save();
 
